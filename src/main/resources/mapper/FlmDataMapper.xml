@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.akd.mapper.FlmDataMapper">
+    
+    <resultMap type="com.akd.entity.FlmData" id="FlmDataResult">
+        <result property="id"    column="id"    />
+        <result property="cinemaInfoId"    column="cinema_info_id"    />
+        <result property="flm"    column="flm"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+	
+	<sql id="selectFlmDataVo">
+        select id, cinema_info_id, flm, create_time, update_time from flm_data
+    </sql>
+	
+    <select id="selectFlmDataList" parameterType="com.akd.entity.FlmData" resultMap="FlmDataResult">
+        <include refid="selectFlmDataVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="cinemaInfoId != null "> and cinema_info_id = #{cinemaInfoId}</if>
+             <if test="flm != null  and flm != '' "> and flm = #{flm}</if>
+             <if test="createTime != null "> and create_time = #{createTime}</if>
+             <if test="updateTime != null "> and update_time = #{updateTime}</if>
+         </where>
+    </select>
+    
+    <select id="selectFlmDataById" parameterType="Integer" resultMap="FlmDataResult">
+        <include refid="selectFlmDataVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFlmData" parameterType="com.akd.entity.FlmData" useGeneratedKeys="true" keyProperty="id">
+        insert into flm_data
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cinemaInfoId != null  ">cinema_info_id,</if>
+			<if test="flm != null  and flm != ''  ">flm,</if>
+			<if test="createTime != null  ">create_time,</if>
+			<if test="updateTime != null  ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cinemaInfoId != null  ">#{cinemaInfoId},</if>
+			<if test="flm != null  and flm != ''  ">#{flm},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="updateTime != null  ">#{updateTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateFlmData" parameterType="com.akd.entity.FlmData">
+        update flm_data
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="cinemaInfoId != null  ">cinema_info_id = #{cinemaInfoId},</if>
+            <if test="flm != null  and flm != ''  ">flm = #{flm},</if>
+            <if test="createTime != null  ">create_time = #{createTime},</if>
+            <if test="updateTime != null  ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteFlmDataById" parameterType="Integer">
+        delete from flm_data where id = #{id}
+    </delete>
+	
+    <delete id="deleteFlmDataByIds" parameterType="String">
+        delete from flm_data where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.akd.mapper.CinemaInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.akd.entity.CinemaInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="cinema_code" property="cinemaCode" jdbcType="VARCHAR" />
+    <result column="cinema_name" property="cinemaName" jdbcType="VARCHAR" />
+    <result column="cinema_address" property="cinemaAddress" jdbcType="VARCHAR" />
+    <result column="conact_name" property="conactName" jdbcType="VARCHAR" />
+    <result column="conact_phone" property="conactPhone" jdbcType="VARCHAR" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, cinema_code, cinema_name, cinema_address, conact_name, conact_phone, token, status, 
+    create_by, create_time, update_by, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cinema_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cinema_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.akd.entity.CinemaInfo" >
+    insert into cinema_info (id, cinema_code, cinema_name, 
+      cinema_address, conact_name, conact_phone, 
+      token, status, create_by, 
+      create_time, update_by, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{cinemaCode,jdbcType=VARCHAR}, #{cinemaName,jdbcType=VARCHAR}, 
+      #{cinemaAddress,jdbcType=VARCHAR}, #{conactName,jdbcType=VARCHAR}, #{conactPhone,jdbcType=VARCHAR}, 
+      #{token,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.akd.entity.CinemaInfo" >
+    insert into cinema_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cinemaCode != null" >
+        cinema_code,
+      </if>
+      <if test="cinemaName != null" >
+        cinema_name,
+      </if>
+      <if test="cinemaAddress != null" >
+        cinema_address,
+      </if>
+      <if test="conactName != null" >
+        conact_name,
+      </if>
+      <if test="conactPhone != null" >
+        conact_phone,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cinemaCode != null" >
+        #{cinemaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaName != null" >
+        #{cinemaName,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaAddress != null" >
+        #{cinemaAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="conactName != null" >
+        #{conactName,jdbcType=VARCHAR},
+      </if>
+      <if test="conactPhone != null" >
+        #{conactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.akd.entity.CinemaInfo" >
+    update cinema_info
+    <set >
+      <if test="cinemaCode != null" >
+        cinema_code = #{cinemaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaName != null" >
+        cinema_name = #{cinemaName,jdbcType=VARCHAR},
+      </if>
+      <if test="cinemaAddress != null" >
+        cinema_address = #{cinemaAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="conactName != null" >
+        conact_name = #{conactName,jdbcType=VARCHAR},
+      </if>
+      <if test="conactPhone != null" >
+        conact_phone = #{conactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.akd.entity.CinemaInfo" >
+    update cinema_info
+    set cinema_code = #{cinemaCode,jdbcType=VARCHAR},
+      cinema_name = #{cinemaName,jdbcType=VARCHAR},
+      cinema_address = #{cinemaAddress,jdbcType=VARCHAR},
+      conact_name = #{conactName,jdbcType=VARCHAR},
+      conact_phone = #{conactPhone,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="selectByCinemaCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from cinema_info
+    where cinema_code = #{cinemaCode,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByToKen" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from cinema_info
+    where token = #{toKen,jdbcType=VARCHAR}
+  </select>
+</mapper>

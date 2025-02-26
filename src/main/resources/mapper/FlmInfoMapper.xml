@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.akd.mapper.FlmInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.akd.entity.FlmInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="cinema_info_id" property="cinemaInfoId" jdbcType="BIGINT" />
+    <result column="flm_data_id" property="flmDataId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="is_report" property="isReport" jdbcType="BIGINT" />
+    <result column="flm_md5" property="flmMd5" jdbcType="VARCHAR" />
+    <result column="message_id" property="messageId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, cinema_info_id, flm_data_id, type, is_report, flm_md5, message_id, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from flm_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from flm_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.akd.entity.FlmInfo" useGeneratedKeys="true" keyProperty="id">
+    insert into flm_info (id, cinema_info_id, flm_data_id, type, is_report,
+      flm_md5, message_id, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{cinemaInfoId,jdbcType=BIGINT}, #{flmDataId,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR},
+       #{isReport,jdbcType=BIGINT}, #{flmMd5,jdbcType=VARCHAR}, #{messageId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.akd.entity.FlmInfo" >
+    insert into flm_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cinemaInfoId != null" >
+        cinema_info_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="isReport != null" >
+        is_report,
+      </if>
+      <if test="flmMd5 != null" >
+        flm_md5,
+      </if>
+      <if test="messageId != null" >
+        message_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="flmDataId != null" >
+        flm_data_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cinemaInfoId != null" >
+        #{cinemaInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="isReport != null" >
+        #{isReport,jdbcType=BIGINT},
+      </if>
+      <if test="flmMd5 != null" >
+        #{flmMd5,jdbcType=VARCHAR},
+      </if>
+      <if test="messageId != null" >
+        #{messageId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flmDataId != null" >
+        #{flm_data_id,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.akd.entity.FlmInfo" >
+    update flm_info
+    <set >
+      <if test="cinemaInfoId != null" >
+        cinema_info_id = #{cinemaInfoId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="flmMd5 != null" >
+        flm_md5 = #{flmMd5,jdbcType=VARCHAR},
+      </if>
+      <if test="messageId != null" >
+        message_id = #{messageId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flmDataId != null" >
+        flm_data_id = #{flmDataId,jdbcType=BIGINT},
+      </if>
+      <if test="isReport != null" >
+        is_report = #{isReport,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.akd.entity.FlmInfo" >
+    update flm_info
+    set cinema_info_id = #{cinemaInfoId,jdbcType=BIGINT},
+      type = #{type,jdbcType=VARCHAR},
+      flm_md5 = #{flmMd5,jdbcType=VARCHAR},
+      message_id = #{messageId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      flm_data_id = #{flmDataId,jdbcType=BIGINT},
+      is_report = #{isReport,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByCinemaInfoId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from flm_info
+    where cinema_info_id = #{cinemaInfoId,jdbcType=BIGINT}
+    order by create_time desc limit 1
+  </select>
+
+  <select id="selectByMessageId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from flm_info
+    where message_id = #{messageId,jdbcType=VARCHAR}
+    order by create_time desc limit 1
+  </select>
+</mapper>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.akd.mapper.FlmParsingAuditoriumMapper">
+    
+    <resultMap type="com.akd.entity.FlmParsingAuditorium" id="FlmParsingAuditoriumResult">
+        <result property="id"    column="id"    />
+        <result property="cinemaInfoId"    column="cinema_info_id"    />
+        <result property="cinemaName"    column="cinema_name"    />
+        <result property="flmInfoId"    column="flm_info_id"    />
+        <result property="messageId"    column="message_id"    />
+        <result property="auditoriumNumber"    column="auditorium_number"    />
+        <result property="auditoriumName"    column="auditorium_name"    />
+        <result property="deviceIdentifier"    column="device_identifier"    />
+        <result property="manufacturerName"    column="manufacturer_name"    />
+        <result property="modelNumber"    column="model_number"    />
+        <result property="isActive"    column="is_active"    />
+        <result property="postType"    column="post_type"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+	
+	<sql id="selectFlmParsingAuditoriumVo">
+        select id, cinema_info_id, cinema_name, flm_info_id, message_id, auditorium_number, auditorium_name, device_identifier, manufacturer_name, model_number, is_active, post_type, create_time, update_time from flm_parsing_auditorium
+    </sql>
+	
+    <select id="selectFlmParsingAuditoriumList" parameterType="com.akd.entity.FlmParsingAuditorium" resultMap="FlmParsingAuditoriumResult">
+        <include refid="selectFlmParsingAuditoriumVo"/>
+        <where>  
+             <if test="cinemaInfoId != null and cinemaInfoId != 0"> and cinema_info_id = #{cinemaInfoId}</if>
+             <if test="cinemaName != null  and cinemaName != '' "> and cinema_name = #{cinemaName}</if>
+             <if test="flmInfoId != null and flmInfoId != 0"> and flm_info_id = #{flmInfoId}</if>
+             <if test="messageId != null  and messageId != '' "> and message_id = #{messageId}</if>
+             <if test="auditoriumNumber != null  and auditoriumNumber != '' "> and auditorium_number = #{auditoriumNumber}</if>
+             <if test="auditoriumName != null  and auditoriumName != '' "> and auditorium_name = #{auditoriumName}</if>
+             <if test="deviceIdentifier != null  and deviceIdentifier != '' "> and device_identifier = #{deviceIdentifier}</if>
+             <if test="manufacturerName != null  and manufacturerName != '' "> and manufacturer_name = #{manufacturerName}</if>
+             <if test="modelNumber != null  and modelNumber != '' "> and model_number = #{modelNumber}</if>
+             <if test="isActive != null  and isActive != '' "> and is_active = #{isActive}</if>
+             <if test="postType != null  and postType != '' "> and post_type = #{postType}</if>
+             <if test="createTime != null "> and create_time = #{createTime}</if>
+             <if test="updateTime != null "> and update_time = #{updateTime}</if>
+         </where>
+    </select>
+    
+    <select id="selectFlmParsingAuditoriumById" parameterType="Integer" resultMap="FlmParsingAuditoriumResult">
+        <include refid="selectFlmParsingAuditoriumVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertFlmParsingAuditorium" parameterType="com.akd.entity.FlmParsingAuditorium" useGeneratedKeys="true" keyProperty="id">
+        insert into flm_parsing_auditorium
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="cinemaInfoId != null  ">cinema_info_id,</if>
+			<if test="cinemaName != null  and cinemaName != ''  ">cinema_name,</if>
+			<if test="flmInfoId != null  ">flm_info_id,</if>
+			<if test="messageId != null  and messageId != ''  ">message_id,</if>
+			<if test="auditoriumNumber != null  and auditoriumNumber != ''  ">auditorium_number,</if>
+			<if test="auditoriumName != null  and auditoriumName != ''  ">auditorium_name,</if>
+			<if test="deviceIdentifier != null  and deviceIdentifier != ''  ">device_identifier,</if>
+			<if test="manufacturerName != null  and manufacturerName != ''  ">manufacturer_name,</if>
+			<if test="modelNumber != null  and modelNumber != ''  ">model_number,</if>
+			<if test="isActive != null  and isActive != ''  ">is_active,</if>
+			<if test="postType != null  and postType != ''  ">post_type,</if>
+			<if test="createTime != null  ">create_time,</if>
+			<if test="updateTime != null  ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="cinemaInfoId != null  ">#{cinemaInfoId},</if>
+			<if test="cinemaName != null  and cinemaName != ''  ">#{cinemaName},</if>
+			<if test="flmInfoId != null  ">#{flmInfoId},</if>
+			<if test="messageId != null  and messageId != ''  ">#{messageId},</if>
+			<if test="auditoriumNumber != null  and auditoriumNumber != ''  ">#{auditoriumNumber},</if>
+			<if test="auditoriumName != null  and auditoriumName != ''  ">#{auditoriumName},</if>
+			<if test="deviceIdentifier != null  and deviceIdentifier != ''  ">#{deviceIdentifier},</if>
+			<if test="manufacturerName != null  and manufacturerName != ''  ">#{manufacturerName},</if>
+			<if test="modelNumber != null  and modelNumber != ''  ">#{modelNumber},</if>
+			<if test="isActive != null  and isActive != ''  ">#{isActive},</if>
+			<if test="postType != null  and postType != ''  ">#{postType},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="updateTime != null  ">#{updateTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateFlmParsingAuditorium" parameterType="com.akd.entity.FlmParsingAuditorium">
+        update flm_parsing_auditorium
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="cinemaInfoId != null  ">cinema_info_id = #{cinemaInfoId},</if>
+            <if test="cinemaName != null  and cinemaName != ''  ">cinema_name = #{cinemaName},</if>
+            <if test="flmInfoId != null  ">flm_info_id = #{flmInfoId},</if>
+            <if test="messageId != null  and messageId != ''  ">message_id = #{messageId},</if>
+            <if test="auditoriumNumber != null  and auditoriumNumber != ''  ">auditorium_number = #{auditoriumNumber},</if>
+            <if test="auditoriumName != null  and auditoriumName != ''  ">auditorium_name = #{auditoriumName},</if>
+            <if test="deviceIdentifier != null  and deviceIdentifier != ''  ">device_identifier = #{deviceIdentifier},</if>
+            <if test="manufacturerName != null  and manufacturerName != ''  ">manufacturer_name = #{manufacturerName},</if>
+            <if test="modelNumber != null  and modelNumber != ''  ">model_number = #{modelNumber},</if>
+            <if test="isActive != null  and isActive != ''  ">is_active = #{isActive},</if>
+            <if test="postType != null  and postType != ''  ">post_type = #{postType},</if>
+            <if test="createTime != null  ">create_time = #{createTime},</if>
+            <if test="updateTime != null  ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteFlmParsingAuditoriumById" parameterType="Integer">
+        delete from flm_parsing_auditorium where id = #{id}
+    </delete>
+	
+    <delete id="deleteFlmParsingAuditoriumByIds" parameterType="String">
+        delete from flm_parsing_auditorium where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getDbLatestMessageIdByCinemaInfoId" parameterType="java.lang.Long" resultMap="FlmParsingAuditoriumResult">
+        <include refid="selectFlmParsingAuditoriumVo"/>
+        where cinema_info_id = #{cinemaInfoId} order by create_time desc limit 1
+    </select>
+</mapper>

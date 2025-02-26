@@ -1,0 +1,65 @@
+server:
+  port: 8111
+#  port:  ${random.int[8000,9000]}
+
+datasource:
+  simple:
+    url: jdbc:mysql://127.0.0.1:3306/kf?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=round&allowMultiQueries=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    max-idle: 10
+    max-wait: 10000
+    min-idle: 5
+    initial-size: 5
+    validation-query: SELECT 1
+    test-on-borrow: true
+    test-while-idle: true
+    time-between-eviction-runs-millis: 18800
+
+
+#pagehelper
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  jackson:
+    serialization: true
+
+#redis config
+spring:
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password:
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+    timeout: 0
+  http:
+    multipart:
+      enabled: true
+      max-file-size: 10MB #限制上传文件大小
+      max-request-size: 10MB
+
+BASE_DIR_UPLOAD:  /kdm/upload/
+
+BASE_DIR_WORK:  /kdm/work/
+
+KDM_RESOLVE_LIMIT:  300000
+
+KDM_VISITS_KEY_REDIS_FREQUENCY: 600
+
+KDM_VISITS_FREQUENCY: 100
+
+FLM_REDIS_EXPIRE: 3600
+
+TOKEN_REDIS_EXPIRE: 7200
